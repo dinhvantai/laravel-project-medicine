@@ -1,0 +1,22 @@
+{
+  "name": "project-laravel-medicine",
+  "description": "",
+  "main": "",
+  "authors": [
+    "dinhvantai <tai.dinhvan2702@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/dinhvantai/laravel-project-medicine",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "fontawesome#^4.7.0",
+    "ckeditor": "^4.6.2"
+  }
+}

@@ -32,8 +32,8 @@ class User extends Authenticatable
 
     public function getPermissionOption(){
         return array(
-            array('value' => self::PERMISSION_USER, 'title' => 'Admin'),
-            array('value' => self::PERMISSION_ADMIN, 'title' => 'Normal User')
+            array('value' => self::PERMISSION_USER, 'title' => 'Normal User'),
+            array('value' => self::PERMISSION_ADMIN, 'title' => 'Admin')
         );
     }
 }
