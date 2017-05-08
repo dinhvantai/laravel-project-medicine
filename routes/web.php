@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('admin.layouts.admin-layout');
+    return view('home');
 });
 
 Auth::routes();
@@ -20,5 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin','middleware' => 'isAdmin'], function(){
+	Route::get('/','Admin\AdminController@index');
 	Route::resource('users', 'Admin\UserController');
 });

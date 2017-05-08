@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Validator;
 
 class UserController extends Controller
 {
@@ -15,7 +16,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $data = [];
+        $users = User::paginate(10);
+        $data['users'] = $users;
+        return view('admin.user.user-list',['data' => $data]);
     }
 
     /**
@@ -25,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.user.user-add');
     }
 
     /**
@@ -36,7 +40,41 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255',
+            'display_name' => 'required',
+            'password' => 'required',
+            'confirm_password' => 'required|same:password',
+            'avatar'    => 'image',
+        ]);
+       
+        $validator->after(function ($validator) {
+            $dataRequest = $validator->getData();
+            $currentUser = User::where('email',$dataRequest['email'])->first();
+
+            if ($currentUser->id) {
+                $validator->errors()->add('email', 'Sorry, this email already exists!');
+            }
+        });
+
+        if ($validator->fails()) {
+            return redirect('admin/users/create')
+                        ->withErrors($validator)
+                        ->withInput($request->input);
+        }
+
+        $user = new User;
+        $user->email = $request->email;
+        $user->display_name = $request->display_name;
+        $user->password = bcrypt($request->password);
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+
+        if ($request->hasFile('avatar')) {
+            $request->avatar->
+        }
+
+        return redirect('admin/users');
     }
 
     /**
@@ -59,8 +97,8 @@ class UserController extends Controller
     public function edit(User $user)
     {
         //
-        $user->email = 'admin@gmail.com';
-        $user->save();
+        // $user->email = 'admin@gmail.com';
+        // $user->save();
         // dd($user);
     }
 
@@ -88,5 +126,6 @@ class UserController extends Controller
         if ($user->id){
             $user->delete();
         }
+        return redirect()->route('users.index');
     }
 }

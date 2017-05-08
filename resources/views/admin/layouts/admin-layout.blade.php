@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="{!! url('bower_components/font-awesome/css/font-awesome.min.css') !!}">
   
     <!-- Theme style -->
-    <link rel="stylesheet" href="{!! url('asset/admin/dist/css/AdminLTE.min.css') !!}">
-    <link rel="stylesheet" href="{!! url('asset/admin/dist/css/skins/_all-skins.min.css') !!}">
-    <link rel="stylesheet" href="{!! url('asset/admin/plugins/datatables/dataTables.bootstrap.css') !!}"/>
+    <link rel="stylesheet" href="{!! url('bower_components/asset-admin-lte/admin/dist/css/AdminLTE.min.css') !!}">
+    <link rel="stylesheet" href="{!! url('bower_components/asset-admin-lte/admin/dist/css/skins/_all-skins.min.css') !!}">
+    <link rel="stylesheet" href="{!! url('bower_components/asset-admin-lte/admin/plugins/datatables/dataTables.bootstrap.css') !!}"/>
   
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
@@ -49,15 +49,15 @@
 
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{$user->avatar or asset('asset/admin/dist/img/avatar.png')}}" class="user-image" alt="User Image">
-                            <span class="hidden-xs">{{$user->username or "Admin"}}</span>
+                            <img src="{!! url('bower_components/asset-admin-lte/admin/dist/img/avatar.png') !!}" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{!! Auth::user()->display_name !!}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="{{$user->avatar or asset('asset/admin/dist/img/avatar.png')}}" class="img-circle" alt="User Image">
+                                <img src="{!! url('bower_components/asset-admin-lte/admin/dist/img/avatar.png') !!}" class="img-circle" alt="User Image">
                                 <p>
-                                    {{$user->username or "Admin"}}
+                                    {!! Auth::user()->display_name !!}
                                     <!-- <small> Từ năm 2016</small>-->
                                 </p>
                             </li>
@@ -76,10 +76,15 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="" class="btn btn-default btn-flat">{{trans('admin.change_pass')}}</a>
+                                    <a href="" class="btn btn-default btn-flat">Change Password</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{url('/logout')}}" class="btn btn-default btn-flat">{{trans('admin.logout')}}</a>
+                                    <form action="{!! url('logout') !!}" method="post">
+                                        {!! csrf_field() !!}
+                                        <button type="button" data-toggle="tooltip" title="" class="btn btn-danger"
+                                                    onclick="confirm('You are logout?') ? $(this).parent().submit(): false;" data-original-title="Logout">Logout
+                                            </button>
+                                    </form>
                                 </div>
                             </li>
                         </ul>
@@ -97,10 +102,10 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{$user->avatar or asset('asset/admin/dist/img/avatar.png')}}" class="img-circle" alt="User Image">
+                    <img src="{!! url('bower_components/asset-admin-lte/admin/dist/img/avatar.png') !!}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Admin</p>
+                    <p>{!! Auth::user()->display_name !!}</p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
@@ -111,7 +116,14 @@
             <ul class="sidebar-menu">
                 
 
-                <li class="header" style=" text-transform: uppercase">{{trans('admin.main_navigation')}}</li>
+                <li class="header" style=" text-transform: uppercase">
+                Main Navigation</li>
+                <li class="treeview">
+                    <a href="{!! url('admin/users') !!}">
+                        <i class="fa fa-book"></i>
+                        <span>Manager User</span>
+                    </a>
+                </li>
 
                 <li class="treeview">
                     <a href="#">
@@ -197,17 +209,17 @@
 <!-- Bootstrap 3.3.5 -->
 <script src="{!! url('bower_components/bootstrap/dist/js/bootstrap.min.js') !!}"></script>
 <!-- AdminLTE App -->
-<script src="{!! url('asset/admin/dist/js/app.min.js') !!}"></script>
+<script src="{!! url('bower_components/asset-admin-lte/admin/dist/js/app.min.js') !!}"></script>
 
 <!-- DataTables -->
-<script src="{!! url('asset/admin/plugins/datatables/jquery.dataTables.min.js') !!}"></script>
-<script src="{!! url('asset/admin/plugins/datatables/dataTables.bootstrap.min.js') !!}"></script>
+<script src="{!! url('bower_components/asset-admin-lte/admin/plugins/datatables/jquery.dataTables.min.js') !!}"></script>
+<script src="{!! url('bower_components/asset-admin-lte/admin/plugins/datatables/dataTables.bootstrap.min.js') !!}"></script>
 <script src="{!! url('bower_components/ckeditor/ckeditor.js') !!}"></script>
 
 <!-- FastClick -->
-<script src="{!! url('asset/admin/plugins/fastclick/fastclick.min.js') !!}"></script>
+<script src="{!! url('bower_components/asset-admin-lte/admin/plugins/fastclick/fastclick.min.js') !!}"></script>
 <!-- SlimScroll 1.3.0 -->
-<script src="{!! url('asset/admin/plugins/slimScroll/jquery.slimscroll.min.js') !!}"></script>
+<script src="{!! url('bower_components/asset-admin-lte/admin/plugins/slimScroll/jquery.slimscroll.min.js') !!}"></script>
 
 @yield('javascript')
 

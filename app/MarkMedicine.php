@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RateMedicine extends Model
+class MarkMedicine extends Model
 {
-    
+    //
 }

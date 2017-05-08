@@ -17,6 +17,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "font-awesome": "fontawesome#^4.7.0",
-    "ckeditor": "^4.6.2"
+    "ckeditor": "^4.6.2",
+    "asset-admin-lte": "https://github.com/dinhvantai/asset-admin-lte.git"
   }
 }
