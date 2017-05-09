@@ -1,5 +1,7 @@
 @extends('admin.layouts.admin-layout')
 
+@section('pageAdminTitle','Add New User')
+
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -12,7 +14,6 @@
     </section>
 
     <!-- Main content -->
-    <?php if (isset($input)) print_r($input) ?>
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
@@ -80,12 +81,28 @@
                                     </div>
                                 </div>
                             </div>
-                             <div class="form-group">
+                            <div class="form-group">
                                 <div class="col-sm-6">
                                     <label class="col-sm-3 control-label required">Avatar</label>
                                     <div class="col-sm-9">
                                         <input type="file" name="avatar" class="form-control">
                                         <span style="color:red">{!! $errors->first('avatar') !!}</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label required">Permission</label>
+                                    <div class="col-sm-9">
+                                        <select name="permission" class="form-control">
+                                            <?php 
+                                                $permissionOptions = App\User::getPermissionOption();
+                                                foreach ($permissionOptions as $key => $option) {
+                                                    $selected = '';
+                                                    if (old('permission') == $key ) $selected = 'selected';
+                                                    echo '<option '. $selected .' value='. $option['value'] .' >'. $option['title'] .'</option>';
+                                                }
+                                            ?>
+                                        </select>
+                                        <span style="color:red">{!! $errors->first('permission') !!}</span>
                                     </div>
                                 </div>
                             </div>

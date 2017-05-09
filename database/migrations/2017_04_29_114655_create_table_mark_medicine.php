@@ -17,13 +17,10 @@ class CreateTableMarkMedicine extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('medicine_id')->unsigned();
-            
             $table->timestamps();
-
 
             $table->foreign('medicine_id')->references('id')->on('medicines');
             $table->foreign('user_id')->references('id')->on('users');
-           
         });
     }
 

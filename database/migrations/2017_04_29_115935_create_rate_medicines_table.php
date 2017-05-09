@@ -20,7 +20,6 @@ class CreateRateMedicinesTable extends Migration
             $table->tinyInteger('point_rate');
             $table->timestamps();
 
-
             $table->foreign('medicine_id')->references('id')->on('medicines');
             $table->foreign('user_id')->references('id')->on('users');
         });

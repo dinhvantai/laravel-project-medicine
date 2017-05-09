@@ -22,7 +22,6 @@ class CreateInforWebsitesTable extends Migration
             $table->text('footer')->nullable();
             $table->text('options')->nullable();
             $table->string('position');
-            
         });
     }
 

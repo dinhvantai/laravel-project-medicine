@@ -15,8 +15,8 @@ class CreateMedicinesTable extends Migration
     {
         Schema::create('medicines', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',255);
-            $table->string('symptom',255)->nullable();
+            $table->string('name', 255);
+            $table->string('symptom', 255)->nullable();
             $table->mediumText('short_describer')->nullable();
             $table->text('detail');
             $table->integer('user_id')->unsigned();
@@ -25,8 +25,7 @@ class CreateMedicinesTable extends Migration
             $table->string('related_medicine')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')
-                ->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

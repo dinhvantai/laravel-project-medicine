@@ -8,9 +8,25 @@ class InforWebsite extends Model
 {
     const POSITION_MAIN = 'position_main';
 
-    public function getPositionOption(){
-    	return array(
-    		array('value' => self::POSITION_MAIN, 'title' => 'Position Main'),
-    	);
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'slogan',
+        'logo',
+        'link_communications',
+        'footer',
+        'options',
+        'position',
+    ];
+
+    public static function getPositionOption()
+    {
+        return [
+            self::POSITION_MAIN => ['value' => self::POSITION_MAIN, 'title' => 'Position Main'],
+        ];
     }
 }

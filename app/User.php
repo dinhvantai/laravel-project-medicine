@@ -18,7 +18,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'display_name', 'email', 'password',
+        'display_name',
+        'email',
+        'password',
     ];
 
     /**
@@ -27,23 +29,28 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
-    public static function getPermissionOption(){
-        return array(
-            self::PERMISSION_USER => array('value' => self::PERMISSION_USER, 'title' => 'Normal User'),
-            self::PERMISSION_ADMIN => array('value' => self::PERMISSION_ADMIN, 'title' => 'Admin')
-        );
+    public static function getPermissionOption()
+    {
+        return [
+            self::PERMISSION_USER => ['value' => self::PERMISSION_USER, 'title' => 'Normal User'],
+            self::PERMISSION_ADMIN => ['value' => self::PERMISSION_ADMIN, 'title' => 'Admin'],
+        ];
     }
 
-    public function getAllComments(){
+    public function getAllComments()
+    {
         return $this->hasMany('App\Comment');
     }
-    public function getAllMarkMedicines(){
+    public function getAllMarkMedicines()
+    {
         return $this->hasMany('App\MarkMedicine');
     }
-    public function getAllPrescriptions(){
+    public function getAllPrescriptions()
+    {
         return $this->hasMany('App\Prescription');
     }
 }

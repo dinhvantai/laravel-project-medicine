@@ -1,5 +1,7 @@
 @extends('admin.layouts.admin-layout')
 
+@section('pageAdminTitle','List User')
+
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -43,8 +45,8 @@
                             </thead>
                             <tbody>
                             <?php 
-                            	$users = $data['users'];
-                            	$currentUser = Auth::user();
+                                $users = $data['users'];
+                                $currentUser = Auth::user();
                             ?>
                             
                             @foreach($users as $user)
@@ -60,23 +62,26 @@
                                         <span><?php echo $user->display_name ?></span>
                                     </td>
                                     <td>
-                                    	<?php $type = App\User::getPermissionOption()[$user->permission] ?>
+                                        <?php $type = App\User::getPermissionOption()[$user->permission] ?>
                                         <span>
-                                        	{!! $type['title'] !!}
+                                            {!! $type['title'] !!}
                                         </span>
                                     </td>
                                     <td>
                                         <form action="{!! url('admin/users/'.$user->id) !!}" method="post">
-                                        	<input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_method" value="DELETE">
                                             {{csrf_field()}}
 
                                             <input type="hidden" name="id" value="{{$user->id}}"></input>
+
+                                            <span class="text-right"><a href="{!! url('admin/users/'.$user->id) !!}" data-toggle="tooltip" class="btn btn-primary" data-original-title="View Detail"><i class="fa fa-eye"></i></a></span>
+
                                             <span class="text-right"><a href="{!! url('admin/users/'.$user->id.'/edit') !!}" data-toggle="tooltip" class="btn btn-primary" data-original-title="Edit"><i class="fa fa-pencil"></i></a></span>
-											@if ($currentUser->id != $user->id)
-                                            <button type="button" data-toggle="tooltip" title="" class="btn btn-danger"
-                                                    onclick="confirm('{{trans('admin.confirm_delete')}}') ? $(this).parent().submit(): false;" data-original-title="Delete">
-                                            	<i class="fa fa-trash-o"></i>
-                                            </button>
+                                            @if ($user->permission != App\User::PERMISSION_ADMIN)
+                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-danger"
+                                                        onclick="confirm('{{trans('admin.confirm_delete')}}') ? $(this).parent().submit(): false;" data-original-title="Delete">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </button>
                                             @endif
                                         </form>
                                     </td>

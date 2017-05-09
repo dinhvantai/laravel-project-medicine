@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
+use Storage;
 
 class UserController extends Controller
 {
@@ -52,7 +53,7 @@ class UserController extends Controller
             $dataRequest = $validator->getData();
             $currentUser = User::where('email',$dataRequest['email'])->first();
 
-            if ($currentUser->id) {
+            if ($currentUser) {
                 $validator->errors()->add('email', 'Sorry, this email already exists!');
             }
         });
@@ -69,10 +70,15 @@ class UserController extends Controller
         $user->password = bcrypt($request->password);
         $user->phone = $request->phone;
         $user->address = $request->address;
-
+        $user->permission = $request->permission;
         if ($request->hasFile('avatar')) {
-            $request->avatar->
+            $path_origin = $request->avatar->hashName();
+            $path = $request->file('avatar')->store('uploads/avatars','uploads');
+            
+            $user->avatar = $path;
         }
+
+        $user->save();
 
         return redirect('admin/users');
     }

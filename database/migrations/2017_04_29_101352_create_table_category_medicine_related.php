@@ -17,7 +17,6 @@ class CreateTableCategoryMedicineRelated extends Migration
             $table->increments('id');
             $table->integer('category_id')->unsigned();
             $table->integer('medicine_id')->unsigned();
-            // $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('medicine_id')->references('id')->on('medicines');

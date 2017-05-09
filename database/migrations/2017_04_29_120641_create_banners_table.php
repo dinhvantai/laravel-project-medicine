@@ -20,7 +20,6 @@ class CreateBannersTable extends Migration
             $table->string('position');
             $table->tinyInteger('status');
             $table->text('options')->nullable();
-
             $table->timestamps();
         });
     }
